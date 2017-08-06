@@ -23,10 +23,10 @@
         android:layout_height="wrap_content"
         android:text="Save"/>
     <Button
-        android:id="@+id/drop_table_btn"
+        android:id="@+id/display_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Drop"/>
+        android:text="DISPLAY"/>
 
     <TextView
         android:id="@+id/display_info_txtv"

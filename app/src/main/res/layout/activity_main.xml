@@ -27,7 +27,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DISPLAY"/>
-
+    <Button
+        android:id="@+id/delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE"/>
     <TextView
         android:id="@+id/display_info_txtv"
         android:layout_width="wrap_content"

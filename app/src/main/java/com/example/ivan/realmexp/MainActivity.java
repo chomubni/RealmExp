@@ -1,7 +1,7 @@
 package com.example.ivan.realmexp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +11,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     Button dropTable;
     @BindView(R.id.display_info_txtv)
     TextView displayInfo;
+    @BindView(R.id.delete_btn)
+    Button deleteBtn;
 
     Realm realm;
 
@@ -38,22 +39,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.save_to_db_btn)
-    public void onSaveUser(View view){
+    public void onSaveUser(View view) {
         String fName = firstName.getText().toString().trim();
         String sName = secondName.getText().toString().trim();
         saveUser(fName, sName);
+        firstName.getText().clear();
+        secondName.getText().clear();
     }
 
     @OnClick(R.id.display_btn)
-    public void displayInfo(View view){
-        if(realm!=null){
+    public void displayInfo(View view) {
+        if (realm != null) {
 //            Realm realmForDisplay = Realm.getDefaultInstance();
 //            realmForDisplay.beginTransaction();
             RealmResults<User> results = realm.where(User.class).findAll();
             //realmForDisplay.close();
-            for(User user : results){
+            displayInfo.setText("");
+            for (User user : results) {
                 displayInfo.append(user.getId() + "   " + user.getFirstName() + "   " + user.getSecondName() + "\n");
             }
+        }
+    }
+
+    @OnClick(R.id.delete_btn)
+    public void deleteAll(View view) {
+        if (realm != null) {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    realm.deleteAll();
+                }
+            });
         }
     }
 
@@ -62,24 +78,28 @@ public class MainActivity extends AppCompatActivity {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                Number currentIdNum = realm.where(User.class).max("id");
-                int nextId;
-                if(currentIdNum == null) {
-                    nextId = 1;
-                } else {
-                    nextId = currentIdNum.intValue() + 1;
-                }
-                User user = realm.createObject(User.class,nextId);
+                int nextId = getNextId(realm);
+                User user = realm.createObject(User.class, nextId);
                 user.setFirstName(fName);
                 user.setSecondName(sName);
             }
         });
     }
 
+    private int getNextId(Realm realm) {
+        Number currentIdNum = realm.where(User.class).max("id");
+        int nextId;
+        if (currentIdNum == null) {
+            nextId = 1;
+        } else {
+            nextId = currentIdNum.intValue() + 1;
+        }
+        return nextId;
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         realm.close();
-
     }
 }

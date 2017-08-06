@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.ivan.realmexp.MainActivity">
+
+    <EditText
+        android:id="@+id/first_name_edtx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="First Name"/>
+    <EditText
+        android:id="@+id/second_name_edtx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Second Name"/>
+    <Button
+        android:id="@+id/save_to_db_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"/>
+    <Button
+        android:id="@+id/drop_table_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Drop"/>
+
+    <TextView
+        android:id="@+id/display_info_txtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>

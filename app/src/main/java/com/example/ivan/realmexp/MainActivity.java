@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
     TextView displayInfo;
     @BindView(R.id.delete_btn)
     Button deleteBtn;
+    @BindView(R.id.where_to_update)
+    EditText whereUpdate;
+    @BindView(R.id.update_btn)
+    Button updateButton;
+    @BindView(R.id.update_data)
+    EditText dataUpdate;
 
     Realm realm;
 
@@ -50,10 +56,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.display_btn)
     public void displayInfo(View view) {
         if (realm != null) {
-//            Realm realmForDisplay = Realm.getDefaultInstance();
-//            realmForDisplay.beginTransaction();
             RealmResults<User> results = realm.where(User.class).findAll();
-            //realmForDisplay.close();
             displayInfo.setText("");
             for (User user : results) {
                 displayInfo.append(user.getId() + "   " + user.getFirstName() + "   " + user.getSecondName() + "\n");
@@ -71,6 +74,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @OnClick(R.id.update_btn)
+    public void udateDate(View view) {
+        String data = whereUpdate.getText().toString().trim();
+        String newData = dataUpdate.getText().toString().trim();
+        realm.beginTransaction();
+        User user = realm.where(User.class).equalTo("firstName", data).findFirst();
+        user.setFirstName(newData);
+        realm.commitTransaction();
     }
 
     private void saveUser(final String fName, final String sName) {

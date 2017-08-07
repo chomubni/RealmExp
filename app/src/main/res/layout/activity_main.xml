@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,31 +10,61 @@
         android:id="@+id/first_name_edtx"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="First Name"/>
+        android:hint="First Name" />
+
     <EditText
         android:id="@+id/second_name_edtx"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Second Name"/>
+        android:hint="Second Name" />
+
     <Button
         android:id="@+id/save_to_db_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"/>
+        android:text="Save" />
+
     <Button
         android:id="@+id/display_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DISPLAY"/>
+        android:text="DISPLAY" />
+
     <Button
         android:id="@+id/delete_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DELETE"/>
+        android:text="DELETE" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/update_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="UPDATE" />
+
+        <EditText
+            android:id="@+id/where_to_update"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="where"/>
+        <EditText
+            android:id="@+id/update_data"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="data to update"/>
+    </LinearLayout>
+
     <TextView
         android:id="@+id/display_info_txtv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

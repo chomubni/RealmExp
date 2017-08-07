@@ -12,12 +12,6 @@ import io.realm.Realm;
 
 public class MyApplication extends Application {
 
-    public static AtomicInteger REALM_ID;
-
-    {
-        REALM_ID = new AtomicInteger();
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();

@@ -1,5 +1,6 @@
 package com.example.ivan.realmexp;
 
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.realm.RealmObject;
@@ -10,17 +11,19 @@ import io.realm.annotations.PrimaryKey;
  */
 
 public class User extends RealmObject {
+    //@PrimaryKey
+    //private int id;
     @PrimaryKey
-    private int id;
+    private String id;
 
     private String firstName;
     private String secondName;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

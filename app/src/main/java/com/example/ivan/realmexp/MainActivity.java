@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -89,9 +92,9 @@ public class MainActivity extends AppCompatActivity {
     private void saveUser(final String fName, final String sName) {
 
         realm.executeTransaction(new Realm.Transaction() {
-            @Override
+        @Override
             public void execute(Realm realm) {
-                int nextId = getNextId(realm);
+                String nextId = getNextId(realm);
                 User user = realm.createObject(User.class, nextId);
                 user.setFirstName(fName);
                 user.setSecondName(sName);
@@ -99,14 +102,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private int getNextId(Realm realm) {
-        Number currentIdNum = realm.where(User.class).max("id");
-        int nextId;
-        if (currentIdNum == null) {
-            nextId = 1;
-        } else {
-            nextId = currentIdNum.intValue() + 1;
-        }
+    private String getNextId(Realm realm) {
+        //Number currentIdNum = realm.where(User.class).max("id");
+        String nextId = UUID.randomUUID().toString();
+        Toast.makeText(this,nextId,Toast.LENGTH_SHORT).show();
         return nextId;
     }
 
